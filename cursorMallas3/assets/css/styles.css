@@ -208,6 +208,83 @@ body {
     z-index: -1;
 }
 
+.hero-hours {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    z-index: 2;
+}
+
+.hours-status {
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.hours-status:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.status-indicator {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator.open {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.status-indicator.closed {
+    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    color: white;
+}
+
+.status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.status-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.status-text.open {
+    color: #28a745;
+}
+
+.status-text.closed {
+    color: #dc3545;
+}
+
+.hours-text {
+    font-size: 0.85rem;
+    color: #374151;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .hero-content {
     text-align: center;
     color: white;
@@ -756,6 +833,30 @@ footer {
     .specs-table td {
         padding: 0.75rem 0.5rem;
     }
+    
+    
+    .hero-hours {
+        margin: 1rem 0;
+    }
+    
+    .hours-status {
+        padding: 0.7rem 1rem;
+    }
+    
+    .status-indicator {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .status-text {
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+    
+    .hours-text {
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
 }
 
 /* 768px */
@@ -785,6 +886,30 @@ footer {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    
+    .hero-hours {
+        margin: 1.25rem 0;
+    }
+    
+    .hours-status {
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .status-indicator {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .status-text {
+        font-size: 0.95rem;
+        font-weight: 700;
+    }
+    
+    .hours-text {
+        font-size: 0.8rem;
+        font-weight: 600;
     }
     
     .carousel-slide img {

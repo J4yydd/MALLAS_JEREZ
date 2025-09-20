@@ -116,7 +116,7 @@
         <nav role="navigation" aria-label="Navegación principal">
             <div class="nav-container">
                 <div class="logo">
-                    <img src="assets/img/logo.png" alt="Logo Mallas Jerez" width="50" height="50" loading="eager">
+                    <img src="assets/img/logo.jpg" alt="Logo Mallas Jerez" width="50" height="50" loading="eager">
                     <span class="brand-name">Mallas Jerez</span>
                 </div>
                 <ul class="nav-menu" role="menubar">
@@ -141,8 +141,26 @@
                         <div class="hero-background">
                 <div class="hero-overlay"></div>
             </div>
+            
             <div class="hero-content">
                 <h1 id="hero-title">Especialistas en Mallas de Seguridad</h1>
+                
+                <!-- Horarios centrados -->
+                <div class="hero-hours">
+                    <div class="hours-status">
+                        <div class="status-indicator" id="status-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12,6 12,12 16,14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="status-info">
+                            <span class="status-text" id="status-text">Verificando...</span>
+                            <span class="hours-text">L-V: 9AM-5PM | S: 9AM-2PM</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <p class="hero-description">Fabricamos y comercializamos mallas de seguridad, cercos eléctricos y accesorios de alta calidad. Más de 15 años de experiencia en Zacatecas, México.</p>
                 <button class="cta-button" onclick="scrollToSection('servicios')" aria-describedby="hero-description">
                     Ver Servicios
@@ -1105,6 +1123,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->

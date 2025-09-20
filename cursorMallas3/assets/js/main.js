@@ -900,6 +900,134 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 });
 
+// ===== HOURS MANAGER =====
+class HoursManager {
+    constructor() {
+        this.hours = {
+            monday: { open: 9, close: 17 }, // 9 AM - 5 PM
+            tuesday: { open: 9, close: 17 },
+            wednesday: { open: 9, close: 17 },
+            thursday: { open: 9, close: 17 },
+            friday: { open: 9, close: 17 },
+            saturday: { open: 9, close: 14 }, // 9 AM - 2 PM
+            sunday: { open: null, close: null } // Cerrado
+        };
+        
+        this.dayNames = {
+            0: 'sunday',
+            1: 'monday', 
+            2: 'tuesday',
+            3: 'wednesday',
+            4: 'thursday',
+            5: 'friday',
+            6: 'saturday'
+        };
+        
+        this.dayLabels = {
+            monday: 'Lunes',
+            tuesday: 'Martes', 
+            wednesday: 'Miércoles',
+            thursday: 'Jueves',
+            friday: 'Viernes',
+            saturday: 'Sábado',
+            sunday: 'Domingo'
+        };
+        
+        this.init();
+    }
+    
+    init() {
+        this.updateStatus();
+        // Actualizar cada minuto
+        setInterval(() => this.updateStatus(), 60000);
+    }
+    
+    isOpen() {
+        const now = new Date();
+        const currentDay = this.dayNames[now.getDay()];
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTime = currentHour + (currentMinute / 60);
+        
+        const todayHours = this.hours[currentDay];
+        
+        if (!todayHours.open || !todayHours.close) {
+            return false; // Cerrado (domingo)
+        }
+        
+        return currentTime >= todayHours.open && currentTime < todayHours.close;
+    }
+    
+    getNextChange() {
+        const now = new Date();
+        const currentDay = now.getDay();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTime = currentHour + (currentMinute / 60);
+        
+        // Buscar el próximo cambio en los próximos 7 días
+        for (let i = 0; i < 7; i++) {
+            const checkDay = (currentDay + i) % 7;
+            const dayName = this.dayNames[checkDay];
+            const dayHours = this.hours[dayName];
+            
+            if (i === 0) {
+                // Día actual
+                if (this.isOpen()) {
+                    // Está abierto, buscar hora de cierre
+                    if (currentTime < dayHours.close) {
+                        return this.formatTime(dayHours.close) + ' (Cierre)';
+                    }
+                } else {
+                    // Está cerrado, buscar hora de apertura
+                    if (dayHours.open && currentTime < dayHours.open) {
+                        return this.formatTime(dayHours.open) + ' (Apertura)';
+                    }
+                }
+            } else {
+                // Días futuros
+                if (dayHours.open && dayHours.close) {
+                    const dayLabel = i === 1 ? 'mañana' : this.dayLabels[dayName];
+                    return this.formatTime(dayHours.open) + ' (' + dayLabel + ')';
+                }
+            }
+        }
+        
+        return 'Próximamente';
+    }
+    
+    formatTime(time) {
+        const hour = Math.floor(time);
+        const minute = Math.round((time - hour) * 60);
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
+        const displayMinute = minute.toString().padStart(2, '0');
+        
+        return `${displayHour}:${displayMinute} ${period}`;
+    }
+    
+    updateStatus() {
+        const statusIcon = document.getElementById('status-icon');
+        const statusText = document.getElementById('status-text');
+        
+        if (!statusIcon || !statusText) return;
+        
+        const isOpen = this.isOpen();
+        
+        // Actualizar icono
+        statusIcon.className = `status-indicator ${isOpen ? 'open' : 'closed'}`;
+        
+        // Actualizar texto de estado
+        statusText.textContent = isOpen ? 'Abierto' : 'Cerrado';
+        statusText.className = `status-text ${isOpen ? 'open' : 'closed'}`;
+    }
+}
+
+// Inicializar HoursManager cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new HoursManager();
+});
+
 // Exportar funciones para testing
 window.MallasJerez = {
     ScrollManager,
@@ -910,6 +1038,7 @@ window.MallasJerez = {
     MobileMenuManager,
     LazyLoadingManager,
     AccessibilityManager,
+    HoursManager,
     Utils,
     PRODUCTS,
     PRODUCTS_DATASET,
