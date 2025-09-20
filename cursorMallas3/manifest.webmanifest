@@ -1,0 +1,27 @@
+﻿{
+    "name": "Mallas Jerez",
+    "short_name": "Mallas Jerez",
+    "description": "Especialistas en malla ciclónica, malla sombra y concertina. Atención formal y profesional en Zacatecas, México.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#C62828",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "assets/img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/img/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "shopping"],
+    "lang": "es-MX",
+    "dir": "ltr"
+}
